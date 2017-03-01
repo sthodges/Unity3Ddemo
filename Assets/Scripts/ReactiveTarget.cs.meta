@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 968ba6855b301449d9392f07a6eec33b
+timeCreated: 1487202363
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - audioSource: {instanceID: 0}
+  - dieSound: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

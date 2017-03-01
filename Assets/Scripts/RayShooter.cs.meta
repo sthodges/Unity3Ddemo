@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 76efe1c13a3cb4db8b8e0e64dacf380c
+timeCreated: 1487197087
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - audioSource: {instanceID: 0}
+  - shotSound: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

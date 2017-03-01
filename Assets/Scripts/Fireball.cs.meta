@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2c6acacc45f434248980987a3b007db2
+timeCreated: 1487798143
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - flamesPrefab: {fileID: 1489419532068890, guid: afc3c686e4f684ab9adf07f38b36624a,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
