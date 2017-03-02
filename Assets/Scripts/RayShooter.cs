@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [RequireComponent (typeof(Camera))]
 public class RayShooter : MonoBehaviour {
@@ -24,13 +25,14 @@ public class RayShooter : MonoBehaviour {
 	//	_audioSource = GetComponent<AudioSource> ();
 
 		// add when doing onGUI
-		Cursor.lockState = CursorLockMode.Locked;
-		Cursor.visible = false;
+		//Cursor.lockState = CursorLockMode.Locked;
+		//Cursor.visible = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetMouseButtonDown (0)) {
+		if (Input.GetMouseButtonDown (0) &&
+			!EventSystem.current.IsPointerOverGameObject() ) {
 
 			audioSource.PlayOneShot (shotSound);
 			
