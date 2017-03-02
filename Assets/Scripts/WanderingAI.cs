@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WanderingAI : MonoBehaviour {
-	public float baseWanderingSpeed = 3.0f;
-	public float wanderingSpeed;
-	public float moveFactor = 1.0f;
+	public static float baseWanderingSpeed = 3.0f;
+	public static float wanderingSpeed;
+	public static float moveFactor = 1.0f;
 	public float obstacleRange = 5.0f;
 
 	[SerializeField] private GameObject fireballPrefab;
