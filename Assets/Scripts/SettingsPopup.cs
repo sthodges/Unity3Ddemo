@@ -25,4 +25,11 @@ public class SettingsPopup : MonoBehaviour {
 	}
 
 
+	public void OnSubmitText( string something){
+		Debug.Log (something);
+	}
+
+	public void OnSpeedValue(float speed){
+		Debug.Log ("speed " + speed);
+	}
 }
