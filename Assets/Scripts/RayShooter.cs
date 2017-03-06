@@ -86,11 +86,11 @@ public class RayShooter : MonoBehaviour {
 		//Font myFont = Resources.GetBuiltinResource<Font>("Arial.ttf");	
 
 
-		int size = 48; //12
+		int size = 32; //12
 		float _posX = _camera.pixelWidth / 2 - size / 4;
 		float _posY = _camera.pixelHeight / 2 - size / 2;
 		//GUI.Label (new Rect (_posX, _posY, size, size), "*");
-		GUI.Label (new Rect (_posX, _posY, size, size), "<color=green><size=40>+</size></color>"); //<color=green><size=40>+</size></color>");
+		GUI.Label (new Rect (_posX, _posY, size, size), "<color=green><size=16>+</size></color>"); //<color=green><size=40>+</size></color>");
 		//GUI.Label(Rect(500,350,200,50),"<color=green><size=40>Lose</size></color>");
 
 	}

@@ -6,9 +6,13 @@ public class SceneController : MonoBehaviour {
 	[SerializeField] private GameObject enemyPrefab;
 	private GameObject _enemy;
 
+	private string _mazeText;
+
 	// Use this for initialization
 	void Start () {
-		
+		_mazeText = System.IO.File.ReadAllText ("Assets/mazesm.txt");
+		//Debug.Log (maze);
+		//Debug.Log (maze.Length);
 	}
 	
 	// Update is called once per frame
