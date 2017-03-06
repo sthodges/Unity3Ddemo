@@ -13,8 +13,8 @@ public class SceneController : MonoBehaviour {
 	void Start () {
 		GameObject wall;
 		_mazeText = System.IO.File.ReadAllText ("Assets/mazesm.txt");
-		//Debug.Log (maze);
-		//Debug.Log (maze.Length);
+		//Debug.Log (_mazeText);
+		//Debug.Log (_mazeText.Length);
 		// add some walls from the prefab programatically
 		// test code initial version:
 		//for (int i = 0; i < 10; i++) {
@@ -40,8 +40,29 @@ public class SceneController : MonoBehaviour {
 		}
 
 
+		int temp;
+		// create inner walls
 		// hardcoded to 5x5 maze encoded into length 25 maze string
-
+		char [] maze = _mazeText.ToCharArray();
+		string square;
+		for (int i = 0; i < 5; i++) {
+			for(int j=0; j<5; j++){
+				temp = maze [i * 5 + j];
+				square = _mazeText.Substring (i * 6 + j, 1); // skip over newlines
+				temp = int.Parse (square, System.Globalization.NumberStyles.HexNumber);
+				//Debug.Log (square + " is " + temp);
+				if (hasRightWall(temp)){
+					wall = Instantiate (wallPrefab) as GameObject;
+					wall.transform.position = new Vector3 (i*10.0f-25.0f, 5.0f, j*10.0f-25.0f);
+					wall.transform.Rotate (0.0f, 90.0f, 0.0f);
+				}
+				if (hasDownWall(temp)){
+					wall = Instantiate (wallPrefab) as GameObject;
+					wall.transform.position = new Vector3 (i*10.0f-25.0f, 5.0f, j*10.0f-25.0f);
+					//wall.transform.Rotate (0.0f, 90.0f, 0.0f);
+				}
+			}
+		}
 
 
 	}
