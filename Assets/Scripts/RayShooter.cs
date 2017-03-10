@@ -24,9 +24,9 @@ public class RayShooter : MonoBehaviour {
 
 	//	_audioSource = GetComponent<AudioSource> ();
 
-		// add when doing onGUI
-		//Cursor.lockState = CursorLockMode.Locked;
-		//Cursor.visible = false;
+		// re-hid and locked the cursor 
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
 	}
 	
 	// Update is called once per frame
@@ -70,6 +70,9 @@ public class RayShooter : MonoBehaviour {
 
 	}
 
+
+	// removed OnGuI crosshairs -- to be replaced with a 2D HUD crosshairs soon
+	/*
 	//Add after SphereCollider shooting ConnectionTesterStatus
 	// an official function -- called to make a GUI
 	void OnGUI() {
@@ -94,7 +97,7 @@ public class RayShooter : MonoBehaviour {
 		//GUI.Label(Rect(500,350,200,50),"<color=green><size=40>Lose</size></color>");
 
 	}
-
+	*/
 
 
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent (typeof(CharacterController))]
+
 public class MouseLook : MonoBehaviour {
 
 	public enum AllowedRotationAxes {
@@ -16,8 +16,8 @@ public class MouseLook : MonoBehaviour {
 
 	public float sensitivityHorizontal = 9.0f;
 	public float sensitivityVertical = 9.0f;
-	public float minimumVertical = -45.0f;
-	public float maximumVertical = 45.0f;
+	public float minimumVertical = -85.0f;
+	public float maximumVertical = 85.0f;
 
 	private float _rotationX = 0.0f;
 
@@ -27,6 +27,8 @@ public class MouseLook : MonoBehaviour {
 		if (body != null) {
 			body.freezeRotation = true;
 		}
+
+
 		
 	}
 	

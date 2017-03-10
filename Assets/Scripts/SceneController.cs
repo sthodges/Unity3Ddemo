@@ -23,20 +23,21 @@ public class SceneController : MonoBehaviour {
 		//}
 		// create outer wall
 		for (int i = 0; i < 10; i++) {
+			/*
 			wall = Instantiate (wallPrefab) as GameObject;
-			wall.transform.position = new Vector3 (i*5.0f-25.0f, 5.0f, -25.0f);
+			wall.transform.position = new Vector3 (i*5.0f-25.0f, 2.5f, -25.0f);
 			wall.transform.Rotate (0.0f, 90.0f, 0.0f);
 
 			wall = Instantiate (wallPrefab) as GameObject;
-			wall.transform.position = new Vector3 (i*5.0f-25.0f, 5.0f, 25.0f);
+			wall.transform.position = new Vector3 (i*5.0f-25.0f, 2.5f, 25.0f);
 			wall.transform.Rotate (0.0f, 90.0f, 0.0f);
 
 			wall = Instantiate (wallPrefab) as GameObject;
-			wall.transform.position = new Vector3 (-25.0f, 5.0f, i*5.0f-25.0f);
+			wall.transform.position = new Vector3 (-25.0f, 2.5f, i*5.0f-25.0f);
 
 			wall = Instantiate (wallPrefab) as GameObject;
-			wall.transform.position = new Vector3 (25.0f, 5.0f, i*5.0f-25.0f);
-	
+			wall.transform.position = new Vector3 (25.0f, 2.5f, i*5.0f-25.0f);
+			*/
 		}
 
 
@@ -53,12 +54,12 @@ public class SceneController : MonoBehaviour {
 				//Debug.Log (square + " is " + temp);
 				if (hasRightWall(temp)){
 					wall = Instantiate (wallPrefab) as GameObject;
-					wall.transform.position = new Vector3 (i*10.0f-25.0f, 5.0f, j*10.0f-25.0f);
+					wall.transform.position = new Vector3 (i*10.0f-25.0f, 2.5f, j*10.0f-25.0f);
 					wall.transform.Rotate (0.0f, 90.0f, 0.0f);
 				}
 				if (hasDownWall(temp)){
 					wall = Instantiate (wallPrefab) as GameObject;
-					wall.transform.position = new Vector3 (i*10.0f-25.0f, 5.0f, j*10.0f-25.0f);
+					wall.transform.position = new Vector3 (i*10.0f-25.0f, 2.5f, j*10.0f-25.0f);
 					//wall.transform.Rotate (0.0f, 90.0f, 0.0f);
 				}
 			}
