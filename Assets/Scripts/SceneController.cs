@@ -16,7 +16,7 @@ public class SceneController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		GameObject wall;
+		//GameObject wall;
 		_mazeText = System.IO.File.ReadAllText ("Assets/mazesm.txt");
 		//Debug.Log (_mazeText);
 		//Debug.Log (_mazeText.Length);
@@ -28,18 +28,18 @@ public class SceneController : MonoBehaviour {
 		//}
 		// create outer wall
 		for (int i = 0; i < 5; i++) {
-			
+			// hack becuase rotation 90deg out of synce
 			//okay
-			drawWallAt (new Vector3 (i * 10.0f - 19.5f, 3.0f, -19.5f), 3); // top walls
+			drawExteriorWallAt (new Vector3 (i * 10.0f - 19.5f, 3.0f, -19.5f), 3); // top walls
 
 			// okay
-			drawWallAt (new Vector3 (i * 10.0f - 19.5f, 3.0f, 20.5f), 1); // bottom walls
+			drawExteriorWallAt (new Vector3 (i * 10.0f - 19.5f, 3.0f, 20.5f), 1); // bottom walls
 
 			//okay
-			drawWallAt (new Vector3 (20.5f, 3.0f, i * 10.0f - 19.5f), 2); // left walls
+			drawExteriorWallAt (new Vector3 (20.5f, 3.0f, i * 10.0f - 19.5f), 2); // left walls
 
 			//okay
-			drawWallAt (new Vector3 (-29.5f, 3.0f, i * 10.0f - 19.5f), 2); // right walls
+			drawExteriorWallAt (new Vector3 (-29.5f, 3.0f, i * 10.0f - 19.5f), 2); // right walls
 
 
 		}
@@ -52,22 +52,29 @@ public class SceneController : MonoBehaviour {
 		string square;
 		for (int i = 0; i < 5; i++) {
 			for(int j=0; j<5; j++){
+	
+		//{{int i = 0; int j = 0; // alt with for loops for upper left square only testing
 				temp = maze [i * 5 + j];
 				square = _mazeText.Substring (i * 6 + j, 1); // skip over newlines
 				temp = int.Parse (square, System.Globalization.NumberStyles.HexNumber);
-				//Debug.Log (square + " is " + temp);
+				//Debug.Log (square +  " " + i + "," + j + " is " + temp);
 				if (hasRightWall(temp)){
-					//wall = Instantiate (wallPrefab) as GameObject;
-					//wall.transform.position = new Vector3 (i*10.0f-25.0f, 2.5f, j*10.0f-25.0f);
-					//wall.transform.Rotate (0.0f, 90.0f, 0.0f);
-				}
+
+					// okay
+					if (i != 5-1)
+					drawWallAt (new Vector3 (i * 10.0f - 19.5f+ 5.0f, 3.0f, j * 10.0f - 19.5f +5.0f), 0);
+
+				} //hRW
 				if (hasDownWall(temp)){
-					//wall = Instantiate (wallPrefab) as GameObject;
-					//wall.transform.position = new Vector3 (i*10.0f-25.0f, 2.5f, j*10.0f-25.0f);
-					//wall.transform.Rotate (0.0f, 90.0f, 0.0f);
-				}
-			}
-		}
+
+					if (j != 5-1)
+				drawWallAt (new Vector3 (i * 10.0f - 19.5f +5.0f, 3.0f, j * 10.0f - 20.5f - 5.0f), 1);
+
+
+				}// hDW
+				//Debug.Log("HERE");
+			}//j
+		}//i
 
 
 	}
@@ -95,6 +102,20 @@ public class SceneController : MonoBehaviour {
 
 	// direction 0 Right, 1 Down, 2 Left, 3 up
 	private void drawWallAt(Vector3 position, int direction){
+		GameObject wall;
+		float thickness = 0.5f; //adjust coordinates for the thickness of the wall
+		Vector3 adjustedPosition = new Vector3 (position.x + XWallOffset [direction]-thickness, position.y, position.z + ZWallOffset [direction]-thickness);
+		wall = Instantiate (wallPrefab) as GameObject;
+		wall.transform.position = adjustedPosition;
+		//if (direction == 1 || direction == 3)
+		if (direction == 0 || direction == 2)	
+			wall.transform.Rotate (0.0f, 90.0f, 0.0f);
+
+	}
+
+	// direction 0 Right, 1 Down, 2 Left, 3 up
+	// OMG: shameful hack -- but I probably won't go back and fix the reversed axis
+	private void drawExteriorWallAt(Vector3 position, int direction){
 		GameObject wall;
 		float thickness = 0.5f; //adjust coordinates for the thickness of the wall
 		Vector3 adjustedPosition = new Vector3 (position.x + XWallOffset [direction]-thickness, position.y, position.z + ZWallOffset [direction]-thickness);
