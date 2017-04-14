@@ -15,6 +15,7 @@ public class FPSInput : MonoBehaviour {
 	private float _vertSpeed;
 	private Vector3 initCameraPosition;
 	private Vector3 aboveCameraPosition;
+	private Quaternion cameraSavedRotation;
 
 	private CharacterController _characterController;
 
@@ -45,11 +46,13 @@ public class FPSInput : MonoBehaviour {
 			if (!flying) {
 				
 				initCameraPosition = _myCamera.transform.position;
+				cameraSavedRotation = _myCamera.transform.localRotation;
 				aboveCameraPosition = new Vector3 (initCameraPosition.x, initCameraPosition.y + 70.0f, initCameraPosition.z);
 			 	iTween.MoveTo (_myCamera.gameObject, aboveCameraPosition, 1.0f);
 				_myCamera.gameObject.transform.LookAt (this.gameObject.transform);
 
 			} else {
+				_myCamera.transform.localRotation = cameraSavedRotation;
 				iTween.MoveTo (_myCamera.gameObject, initCameraPosition, 1.0f);
 				//_myCamera.gameObject.transform.LookAt (this.gameObject.transform.forward)
 			}
