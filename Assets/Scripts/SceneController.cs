@@ -8,7 +8,7 @@ public class SceneController : MonoBehaviour {
 	private GameObject _enemy;
 
 	private string _mazeText;
-
+	private string _defaultMaze;
 	// note: wall prefabs are 1x by 10z
 	// so to figure out center point for drawing wall, depending on position adjust by
 	private float [] XWallOffset = { -5f, 0f, 5f, 0f };
@@ -17,15 +17,27 @@ public class SceneController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//GameObject wall;
-		_mazeText = System.IO.File.ReadAllText ("Assets/mazesm.txt");
-		//Debug.Log (_mazeText);
-		//Debug.Log (_mazeText.Length);
-		// add some walls from the prefab programatically
-		// test code initial version:
-		//for (int i = 0; i < 10; i++) {
-		//	wall = Instantiate (wallPrefab) as GameObject;
-		//	wall.transform.position = new Vector3 (i*5, 5.0f, i*5);
-		//}
+		_defaultMaze = System.IO.File.ReadAllText ("Assets/mazesm.txt");
+
+		_mazeText = "";
+
+		LoadMaze (_defaultMaze);
+
+
+	}
+
+	// test maze, then load if "okay"
+	void LoadMaze(string mazeToTest){
+		if (false) {
+
+		} else {
+			_mazeText = _defaultMaze;
+			ReallyLoadTheMaze ();
+		}
+	}
+
+	// loads from 
+	private void ReallyLoadTheMaze(){
 		// create outer wall
 		for (int i = 0; i < 5; i++) {
 			// hack becuase rotation 90deg out of synce
@@ -52,8 +64,8 @@ public class SceneController : MonoBehaviour {
 		string square;
 		for (int i = 0; i < 5; i++) {
 			for(int j=0; j<5; j++){
-	
-		//{{int i = 0; int j = 0; // alt with for loops for upper left square only testing
+
+				//{{int i = 0; int j = 0; // alt with for loops for upper left square only testing
 				temp = maze [i * 5 + j];
 				square = _mazeText.Substring (i * 6 + j, 1); // skip over newlines
 				temp = int.Parse (square, System.Globalization.NumberStyles.HexNumber);
@@ -62,22 +74,24 @@ public class SceneController : MonoBehaviour {
 
 					// okay
 					if (i != 5-1)
-					drawWallAt (new Vector3 (i * 10.0f - 19.5f+ 5.0f, 3.0f, j * 10.0f - 19.5f +5.0f), 0);
+						drawWallAt (new Vector3 (i * 10.0f - 19.5f+ 5.0f, 3.0f, j * 10.0f - 19.5f +5.0f), 0);
 
 				} //hRW
 				if (hasDownWall(temp)){
 
 					if (j != 5-1)
-				drawWallAt (new Vector3 (i * 10.0f - 19.5f +5.0f, 3.0f, j * 10.0f - 20.5f - 5.0f), 1);
+						drawWallAt (new Vector3 (i * 10.0f - 19.5f +5.0f, 3.0f, j * 10.0f - 20.5f - 5.0f), 1);
 
 
 				}// hDW
 				//Debug.Log("HERE");
 			}//j
 		}//i
-
-
 	}
+
+
+
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -125,5 +139,11 @@ public class SceneController : MonoBehaviour {
 			wall.transform.Rotate (0.0f, 90.0f, 0.0f);
 
 	}
+
+
+	public void LoadMazeFromClipboard(){
+
+	}
+
 
 }

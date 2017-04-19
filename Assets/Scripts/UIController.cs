@@ -22,7 +22,9 @@ public class UIController : MonoBehaviour {
 	void Update () {
 		//scoreLabel.text = Time.realtimeSinceStartup.ToString ();	
 		//scoreLabel.text = _score.ToString();
-	
+		if (Input.GetKeyDown (KeyCode.M)) {
+			OnOpenSettings ();
+		}
 	}
 
 
@@ -37,12 +39,25 @@ public class UIController : MonoBehaviour {
 
 	public void OnOpenSettings(){
 		//Debug.Log ("open settings");
+		Cursor.lockState = CursorLockMode.None;
+		Cursor.visible = true;
+
 		settingsPopup.Open();
+	}
+
+	public void OnCloseSettings(){
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
+		settingsPopup.Close ();
 	}
 
 	private void OnEnemyHit(){
 		_score += 1;
 		scoreLabel.text = _score.ToString();
+
+	}
+
+	public void LoadMazeFromClipboard(){
 
 	}
 }
