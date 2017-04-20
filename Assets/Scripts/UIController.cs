@@ -57,7 +57,5 @@ public class UIController : MonoBehaviour {
 
 	}
 
-	public void LoadMazeFromClipboard(){
 
-	}
 }

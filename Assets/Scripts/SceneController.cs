@@ -47,10 +47,10 @@ public class SceneController : MonoBehaviour {
 			// okay
 			drawExteriorWallAt (new Vector3 (i * 10.0f - 19.5f, 3.0f, 20.5f), 1); // bottom walls
 
-			//okay
+			//okay -- maybe actually right?
 			drawExteriorWallAt (new Vector3 (20.5f, 3.0f, i * 10.0f - 19.5f), 2); // left walls
 
-			//okay
+			//okay -- do want -- maybe left or actually top
 			drawExteriorWallAt (new Vector3 (-29.5f, 3.0f, i * 10.0f - 19.5f), 2); // right walls
 
 
@@ -62,7 +62,7 @@ public class SceneController : MonoBehaviour {
 		// hardcoded to 5x5 maze encoded into length 25 maze string
 		char [] maze = _mazeText.ToCharArray();
 		string square;
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 5-1; i++) {
 			for(int j=0; j<5; j++){
 
 				//{{int i = 0; int j = 0; // alt with for loops for upper left square only testing
@@ -73,14 +73,15 @@ public class SceneController : MonoBehaviour {
 				if (hasRightWall(temp)){
 
 					// okay
-					if (i != 5-1)
+					//if (i != 5-1)
+					//if (i != 0)
 						drawWallAt (new Vector3 (i * 10.0f - 19.5f+ 5.0f, 3.0f, j * 10.0f - 19.5f +5.0f), 0);
 
 				} //hRW
 				if (hasDownWall(temp)){
 
 					if (j != 5-1)
-						drawWallAt (new Vector3 (i * 10.0f - 19.5f +5.0f, 3.0f, j * 10.0f - 20.5f - 5.0f), 1);
+					   drawWallAt (new Vector3 (i * 10.0f - 19.5f +5.0f, 3.0f, j * 10.0f - 20.5f - 5.0f), 1);
 
 
 				}// hDW
@@ -142,7 +143,7 @@ public class SceneController : MonoBehaviour {
 
 
 	public void LoadMazeFromClipboard(){
-
+		Debug.Log ("LoadMazeFromClipboard");
 	}
 
 
