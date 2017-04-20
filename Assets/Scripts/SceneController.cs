@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class SceneController : MonoBehaviour {
@@ -99,7 +100,7 @@ public class SceneController : MonoBehaviour {
 	if (_enemy == null) {
 		_enemy = Instantiate (enemyPrefab) as GameObject;
 		_enemy.transform.position = new Vector3 (0.0f, 1.0f, 0.0f);
-		float angle = Random.Range (0.0f, 360.0f);
+		float angle = UnityEngine.Random.Range (0.0f, 360.0f);
 		_enemy.transform.Rotate (0.0f, angle, 0.0f);
 	}
 
@@ -143,7 +144,21 @@ public class SceneController : MonoBehaviour {
 
 
 	public void LoadMazeFromClipboard(){
-		Debug.Log ("LoadMazeFromClipboard");
+		string temp = GUIUtility.systemCopyBuffer;
+
+		string[] lines = temp.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+
+		int size = lines.Length;
+
+		/*
+			using (System.IO.StringReader reader = new System.IO.StringReader(input)) {
+    string line = reader.ReadLine();
+}
+		*/
+
+		for (int i = 0; i < size; i++) {
+			Debug.Log (i+lines[i]);
+		}
 	}
 
 
