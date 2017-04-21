@@ -6,10 +6,14 @@ using UnityEngine;
 public class SceneController : MonoBehaviour {
 	[SerializeField] private GameObject enemyPrefab;
 	[SerializeField] private GameObject wallPrefab;
+	[SerializeField] private GameObject floorPrefab;
+
 	private GameObject _enemy;
 
 	private string _mazeText;
 	private string _defaultMaze;
+	private int _mazeSize;
+
 	// note: wall prefabs are 1x by 10z
 	// so to figure out center point for drawing wall, depending on position adjust by
 	private float [] XWallOffset = { -5f, 0f, 5f, 0f };
@@ -19,28 +23,41 @@ public class SceneController : MonoBehaviour {
 	void Start () {
 		//GameObject wall;
 		_defaultMaze = System.IO.File.ReadAllText ("Assets/mazesm.txt");
-
 		_mazeText = "";
-
-		LoadMaze (_defaultMaze);
-
-
+		_mazeSize = 5;
+		_mazeText = _defaultMaze;
+		ReallyLoadTheMaze (); //LoadMaze (_defaultMaze);
 	}
 
 	// test maze, then load if "okay"
-	void LoadMaze(string mazeToTest){
+	/*void LoadMaze(string mazeToTest){
+		_mazeSize = 5;
 		if (false) {
 
 		} else {
 			_mazeText = _defaultMaze;
+			_mazeSize = 5;
+			XWallOffset [0] = -_mazeSize;
+			XWallOffset [2] = _mazeSize;
+			ZWallOffset [1] = _mazeSize;
+			ZWallOffset [3] = -_mazeSize;
 			ReallyLoadTheMaze ();
 		}
 	}
+	*/
 
 	// loads from 
 	private void ReallyLoadTheMaze(){
+
+		XWallOffset [0] = -_mazeSize;
+		XWallOffset [2] = _mazeSize;
+		ZWallOffset [1] = _mazeSize;
+		ZWallOffset [3] = -_mazeSize;
+
+
+		GameObject floorTile;
 		// create outer wall
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < _mazeSize; i++) {
 			// hack becuase rotation 90deg out of synce
 			//okay
 			drawExteriorWallAt (new Vector3 (i * 10.0f - 19.5f, 3.0f, -19.5f), 3); // top walls
@@ -58,33 +75,37 @@ public class SceneController : MonoBehaviour {
 		}
 
 
+		// make the floor from 1x1 prefabs
+		for (int i = 0; i < _mazeSize; i++) {
+			for (int j = 0; j < _mazeSize; j++) {
+				floorTile = Instantiate (floorPrefab) as GameObject;
+				floorTile.transform.position = new Vector3 (i * 10.0f - 20.0f, 0.0f, j * 10.0f - 20.0f);
+
+			}
+		}
+
+
 		int temp;
 		// create inner walls
 		// hardcoded to 5x5 maze encoded into length 25 maze string
 		char [] maze = _mazeText.ToCharArray();
 		string square;
-		for (int i = 0; i < 5-1; i++) {
-			for(int j=0; j<5; j++){
+		for (int i = 0; i < _mazeSize-1; i++) {
+			for(int j=0; j<_mazeSize-1; j++){
 
 				//{{int i = 0; int j = 0; // alt with for loops for upper left square only testing
-				temp = maze [i * 5 + j];
-				square = _mazeText.Substring (i * 6 + j, 1); // skip over newlines
+				temp = maze [i * _mazeSize + j];
+				square = _mazeText.Substring (i * (_mazeSize +1) + j, 1); // skip over newlines
 				temp = int.Parse (square, System.Globalization.NumberStyles.HexNumber);
 				//Debug.Log (square +  " " + i + "," + j + " is " + temp);
 				if (hasRightWall(temp)){
-
-					// okay
-					//if (i != 5-1)
-					//if (i != 0)
-						drawWallAt (new Vector3 (i * 10.0f - 19.5f+ 5.0f, 3.0f, j * 10.0f - 19.5f +5.0f), 0);
-
+						//drawWallAt (new Vector3 (i * 10.0f - 19.5f+ 5.0f, 3.0f, j * 10.0f - 19.5f +5.0f), 0);
+					    drawWallAt (new Vector3 (i * 10.0f - 14.5f, 3.0f, j * 10.0f - 14.5f), 0);
 				} //hRW
 				if (hasDownWall(temp)){
-
-					if (j != 5-1)
-					   drawWallAt (new Vector3 (i * 10.0f - 19.5f +5.0f, 3.0f, j * 10.0f - 20.5f - 5.0f), 1);
-
-
+					//drawWallAt (new Vector3 (i * 10.0f - 19.5f +5.0f, 3.0f, j * 10.0f - 20.5f - 4.5f), 1);
+					//drawWallAt (new Vector3 (i * 10.0f - 19.5f +5.0f, 3.0f, j * 10.0f - 20.5f - 4.249f), 1);
+					drawWallAt (new Vector3 (i * 10.0f - 14.5f, 3.0f, j * 10.0f - 24.749f ), 1);
 				}// hDW
 				//Debug.Log("HERE");
 			}//j
@@ -150,15 +171,26 @@ public class SceneController : MonoBehaviour {
 
 		int size = lines.Length;
 
+		for (int i = 0; i < size; i++) {
+			if (lines [i].Length != size) {
+				Debug.Log ("Line " + i + " of Maze has Length " + lines [i].Length + " but Length " + size + "was expected");
+				Debug.Log ("discarding new Maze");
+				return;
+			}
+
+		}
+		Debug.Log ("Loading " + size + " by " + size + " maze.");
+			// n x n maze string verified!
+
 		/*
 			using (System.IO.StringReader reader = new System.IO.StringReader(input)) {
     string line = reader.ReadLine();
 }
 		*/
 
-		for (int i = 0; i < size; i++) {
-			Debug.Log (i+lines[i]);
-		}
+		//for (int i = 0; i < size; i++) {
+		//	Debug.Log (i+lines[i]);
+		//}
 	}
 
 
